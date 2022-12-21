@@ -67,11 +67,13 @@ if __name__ == "__main__":
     # mel spectrogram settings
     duration = 5
     sr = 44100
-    fmax = 2000
+    fmax = 5000
     nr_threshold = 0.5
-    n_mels=128
-    n_fft=8192
-    hop_length=2048
+    n_mels=192
+    n_fft=2048
+    hop_length=1024
+
+
 
     pitch_ids = [f.split('.')[0] for f in video_files]
     
@@ -120,47 +122,3 @@ if __name__ == "__main__":
         plt.close('all')
         plt.cla()
         plt.clf()
-
-
-
-
-
-
-
-
-
-
-    # # read in the available images
-    # pitch_ids = [f.split('.')[-2] for f in os.listdir(param_dict['input_path']) if f.split('.')[-1] == 'png' ]
-    # pitch_ids.sort()
-    # print('read in and sorted the pitch pngs')
-    # # read in the pitch table and subset from pitch_ids in the images
-    # df = pd.read_csv(os.path.join(param_dict['input_path'],'table','pitch_table.csv'))
-    # df = df.loc[df['pitch_id'].isin(pitch_ids)].sort_values('pitch_id')
-    # pitch_ids = list(df['pitch_id'])
-    # df['label'] = df['pitch'].isin(['CU','SL','CH','KC','FC','EP'])*1
-    # df['month'] = pd.to_datetime(df['date'],format='%Y-%m-%d').dt.strftime('%Y-%m')
-    # # df = df.loc[df['date']>'2017-01-01']
-    # y = df[['label']]
-    # print('read in and transformed the pitch table')
-           
-    #  # create one-hot-encoded metadata dataset
-    # enc = OneHotEncoder(sparse=False)
-    # X_meta_data = enc.fit_transform(df[['batter','month']])
-    # with open(os.path.join(param_dict['output_path'],'metadata_processor.joblib'), 'wb') as f:
-    #     joblib.dump(enc, f)
-
-    # np.save(os.path.join(param_dict["output_path"],'meta_data.npy'),X_meta_data)
-    # np.save(os.path.join(param_dict["output_path"],'y.npy'),y)
-
-    # print('starting pitch file to numpy transformation')                 
-    # images=[]
-    # for pitch_id in pitch_ids:
-    #     # load the image
-    #     path = os.path.join(param_dict["input_path"], pitch_id + '.png')
-    #     image = Image.open(path).convert('L')
-    #     images.append(np.asarray(image).reshape(128, -1, 1).astype(np.float16))
-    # image_data = np.array(images)
-    # np.save(os.path.join(param_dict["output_path"],'image_file.npy'),image_data)
-
-    # print('finished pitch file to numpy transformation')

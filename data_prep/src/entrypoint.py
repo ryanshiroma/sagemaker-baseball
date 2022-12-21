@@ -47,7 +47,7 @@ if __name__ == "__main__":
         # load the image
         path = os.path.join(param_dict["input_path"], pitch_id + '.png')
         image = Image.open(path).convert('L')
-        images.append(np.asarray(image).reshape(128, -1, 1).astype(np.float16))
+        images.append(np.asarray(image).reshape(192, -1, 1).astype(np.float16))
 
     print('finished converting images')
     pitch_df['label'] = pitch_df['pitch_type'].isin(['CU','SL','CH','KC','FC','EP'])*1
